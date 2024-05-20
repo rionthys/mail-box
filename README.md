@@ -15,5 +15,6 @@ PostgreSQL
 ## Technologies:
 - Node.js
 - TypeScript
+- Nest.js
 - PostgreSQL
 - Nginx
