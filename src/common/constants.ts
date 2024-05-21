@@ -1,0 +1,2 @@
+export const SEQUELIZE = 'SEQUELIZE';
+export const DATABASE_REQUEST = 'DATABASE_REQUEST';
