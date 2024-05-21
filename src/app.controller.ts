@@ -1,12 +1,25 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get, Inject } from '@nestjs/common';
+import { USERS_SERVICE } from './common/constants';
+import { IUsersService } from './modules/users/interfaces/users.interface';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    @Inject(USERS_SERVICE)
+    private readonly usersService: IUsersService,
+  ) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  async getHello(): Promise<any> {
+    await this.usersService.update(
+      { username: 'pedro' },
+      {
+        username: 'pedro Update',
+        password: 'hehe',
+        email: 'pedro@gmail.com',
+      },
+    );
+
+    return this.usersService.findOne({ username: 'pedro Update' });
   }
 }
