@@ -1,6 +1,7 @@
 # Mail-box
 
-To create an improvised mail server using Node.js with TypeScript and a relational database (PostgreSQL, without ORM models), the server should include the following features:
+To create an improvised mail server using Node.js with TypeScript and a relational database (PostgreSQL, without ORM
+models), the server should include the following features:
 
 - Registration
 - Authorization
@@ -10,11 +11,13 @@ To create an improvised mail server using Node.js with TypeScript and a relation
 - Editing Emails
 
 Additionally, when a new email is added, implement real-time notifications for users who are online.
-PostgreSQL
 
 ## Technologies:
+
 - Node.js
 - TypeScript
 - Nest.js
+- Passport.js
 - PostgreSQL
+- Sequelize
 - Nginx
