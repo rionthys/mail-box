@@ -1,4 +1,4 @@
-export class EitherDto {
+export class EitherDto<T> {
   success: boolean;
-  data: unknown;
+  data: T;
 }

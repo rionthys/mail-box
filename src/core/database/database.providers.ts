@@ -15,6 +15,17 @@ export const databaseProviders = [
           password VARCHAR(255) NOT NULL,
           email VARCHAR(255) NOT NULL UNIQUE
         );
+        CREATE TABLE IF NOT EXISTS messages (
+            id SERIAL PRIMARY KEY,
+            read BOOLEAN DEFAULT FALSE,
+            title TEXT NOT NULL,
+            content TEXT,
+            attachment BYTEA,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            from_email TEXT NOT NULL,
+            to_email TEXT NOT NULL
+        );
       `);
       return sequelize;
     },
