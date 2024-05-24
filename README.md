@@ -21,3 +21,224 @@ Additionally, when a new email is added, implement real-time notifications for u
 - PostgreSQL
 - Sequelize
 - Nginx
+
+## API Documentation
+
+### Authentication
+
+#### Login
+
+Endpoint: POST `/auth/login`
+
+Headers:
+```
+Content-Type: application/json
+```
+
+Request Body:
+- username (string): The username of the user (required)
+- password (string): The password of the user (required)
+
+Response:
+- 200 OK: Returns an access token if the login is successful.
+
+Example Request:
+```
+curl -X POST http://yourdomain.com/auth/login \
+-H "Content-Type: application/json" \
+-d '{
+  "username": "johndoe",
+  "password": "password123"
+}'
+```
+
+Example Response:
+```
+{
+  "success": true,
+  "data": {
+    "access_token": "your_access_token_here"
+  }
+}
+```
+
+#### Register
+
+Endpoint: POST `/auth/register`
+
+Headers:
+```
+Content-Type: application/json
+```
+
+Request Body:
+- username (string): The username of the user (required)
+- password (string): The password of the user (required)
+- email (string): The email address of the user (required)
+
+Response:
+- 200 OK: Returns a message response if the registration is successful.
+
+Example Request:
+```
+curl -X POST http://yourdomain.com/auth/register \
+-H "Content-Type: application/json" \
+-d '{
+  "username": "johndoe",
+  "password": "password123",
+  "email": "johndoe@example.com"
+}'
+```
+
+Example Response:
+```
+{
+  "success": true,
+  "data": {
+    "message": "User registered successfully."
+  }
+}
+```
+
+### Mails
+
+#### Get All Emails
+
+Endpoint: GET `/mails/`
+
+Headers:
+```
+Authorization: Bearer <token>
+```
+
+Example Request:
+```
+curl -X GET "http://yourdomain.com/mails/" \
+-H "Authorization: Bearer your_jwt_token"
+```
+
+Example Response
+```
+{
+  "success": true,
+  "data": [
+    [
+      {
+        "id": 1,
+        "read": false,
+        "title": "Welcome!",
+        "content": "Welcome to our service.",
+        "attachment": null,
+        "from_email": "no-reply@yourdomain.com",
+        "to_email": "user@example.com"
+      }
+    ]
+  }
+```
+
+#### Send a Email
+
+Endpoint: POST `/mails/send`
+
+Headers:
+```
+Authorization: Bearer <token>
+Content-Type: application/json
+```
+
+Request Body:
+- title (string): The title of the message (required)
+- content (string): The content of the message (required)
+- attachment (any): The attachment of the message (optional)
+- to_email (string): The recipient's email (required)
+
+Example Request:
+```
+curl -X POST http://yourdomain.com/mails/send/ \
+-H "Authorization: Bearer <token>" \
+-H "Content-Type: application/json" \
+-d '{
+  "title": "Meeting Reminder",
+  "content": "Don'\''t forget about the meeting tomorrow.",
+  "to_email": "recipient@example.com"
+}'
+```
+
+Example Response:
+```
+{
+  "success": true,
+  "data": {
+    "message": "successfully created"
+  }
+}
+```
+
+
+#### Edit a Mail
+
+Endpoint: PATCH /mails/:id
+
+Headers:
+```
+Authorization: Bearer <token>
+Content-Type: application/json
+```
+
+Parameters:
+- id (string): The ID of the mail to edit (required)
+
+Request Body:
+- title (string): The title of the message (optional)
+- content (string): The content of the message (optional)
+- attachment (any): The attachment of the message (optional)
+
+Example Request:
+```
+curl -X PATCH http://yourdomain.com/mails/1 \
+-H "Authorization: Bearer <token>" \
+-H "Content-Type: application/json" \
+-d '{
+  "title": "Updated Title",
+  "content": "Updated content."
+}'
+```
+
+Example Response: 
+```
+{
+  "success": true,
+  "data": {
+    "message": "successfully updated"
+  }
+}
+```
+
+#### Delete a Mail
+
+Endpoint: DELETE /mails/:id
+
+Headers:
+```
+Authorization: Bearer <token>
+Content-Type: application/json
+```
+
+Parameters:
+- id (string): The ID of the mail to edit (required)
+
+Example Request:
+```
+curl -X DELETE http://yourdomain.com/1 \
+-H "Authorization: Bearer <token>"
+```
+
+Example Response: 
+```
+{
+  "success": true,
+  "data": {
+    "message": "successfully deleted"
+  }
+}
+```
