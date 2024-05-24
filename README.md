@@ -22,45 +22,54 @@ Additionally, when a new email is added, implement real-time notifications for u
 - Sequelize
 - Nginx
 
+## Project Installation
+
+### Step 1: Clone the Repository
+
+Clone the project repository to your local machine.
+
+```bash
+git clone https://github.com/yourusername/mail-box.git
+cd mail-box
+```
+
+### Step 2: Install Dependencies
+
+Install the required dependencies using npm.
+```
+npm install
+```
+
+### Step 3: Environment Configuration
+Create a .env file in the root directory of your project and add the necessary environment variables.
+
+Example .env file:
+```
+# Database configuration
+DATABASE_DIALECT=postgres
+DATABASE_USERNAME=your_db_username
+DATABASE_PASSWORD=your_db_password
+DATABASE_NAME=your_db_name
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+
+# JWT Secret Key
+JWT_SECRET_KEY=your_jwt_secret_key
+```
+
+### Step 4: Database Setup
+Ensure you have a PostgreSQL database running and create a new database for the project.
+
+### Production Mode
+To build the project and start it in production mode:
+```
+npm run build
+npm run start:prod
+```
+
 ## API Documentation
 
 ### Authentication
-
-#### Login
-
-Endpoint: POST `/auth/login`
-
-Headers:
-```
-Content-Type: application/json
-```
-
-Request Body:
-- username (string): The username of the user (required)
-- password (string): The password of the user (required)
-
-Response:
-- 200 OK: Returns an access token if the login is successful.
-
-Example Request:
-```
-curl -X POST http://yourdomain.com/auth/login \
--H "Content-Type: application/json" \
--d '{
-  "username": "johndoe",
-  "password": "password123"
-}'
-```
-
-Example Response:
-```
-{
-  "success": true,
-  "data": {
-    "access_token": "your_access_token_here"
-  }
-}
-```
 
 #### Register
 
@@ -100,6 +109,45 @@ Example Response:
 }
 ```
 
+---
+
+#### Login
+
+Endpoint: POST `/auth/login`
+
+Headers:
+```
+Content-Type: application/json
+```
+
+Request Body:
+- username (string): The username of the user (required)
+- password (string): The password of the user (required)
+
+Response:
+- 200 OK: Returns an access token if the login is successful.
+
+Example Request:
+```
+curl -X POST http://yourdomain.com/auth/login \
+-H "Content-Type: application/json" \
+-d '{
+  "username": "johndoe",
+  "password": "password123"
+}'
+```
+
+Example Response:
+```
+{
+  "success": true,
+  "data": {
+    "access_token": "your_access_token_here"
+  }
+}
+```
+
+---
 ### Mails
 
 #### Get All Emails
@@ -135,6 +183,8 @@ Example Response
     ]
   }
 ```
+
+---
 
 #### Send a Email
 
@@ -174,6 +224,7 @@ Example Response:
 }
 ```
 
+---
 
 #### Edit a Mail
 
@@ -213,6 +264,8 @@ Example Response:
   }
 }
 ```
+
+---
 
 #### Delete a Mail
 
